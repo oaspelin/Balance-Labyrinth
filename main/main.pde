@@ -1,3 +1,4 @@
+
 //ball positions
 int ballX;
 int ballY;
@@ -8,6 +9,11 @@ int vx;
 int vy;
 //for reading the .txt file
 String lines[];
+
+//list of all the characters from the .txt file
+ArrayList<Character> tiles = new ArrayList<Character>();
+//size of the map
+int mapsize;
 
 void setup() {
   size(500, 500);
@@ -25,11 +31,13 @@ void setup() {
 }
 
 void readMap() {
-  int index=0;
+  int index=1;
   lines=loadStrings("../maps/test.txt");
+  mapsize=lines[0]; //size of map defined in the .txt document
   while(index < lines.length) {
-    String[] pieces = split(lines[index], " ");
-    println(pieces.length);
+    for (char c : lines[index].toCharArray()) {
+      tiles.add(c);
+    }
     index = index + 1;
   }
 }
