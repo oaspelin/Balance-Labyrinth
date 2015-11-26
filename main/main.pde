@@ -33,7 +33,7 @@ void setup() {
 void readMap() {
   int index=1;
   lines=loadStrings("../maps/test.txt");
-  mapsize=lines[0]; //size of map defined in the .txt document
+  mapsize=Integer.parseInt(lines[0]); //size of map defined in the .txt document
   while(index < lines.length) {
     for (char c : lines[index].toCharArray()) {
       tiles.add(c);
@@ -42,11 +42,20 @@ void readMap() {
   }
 }
 
+void drawMap(){
+  for(char tile: tiles){
+    fill(0);
+    switch (tile){
+      case 'o' :ellipse(60,60,40,40);
+    }
+  }
+}
 void draw() {
   background(#A5370C);
   fill(255);
   //kehys
   rect(5, 5, 490, 490);
+  drawMap();
   drawBall();
 }
 
