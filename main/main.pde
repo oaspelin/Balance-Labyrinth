@@ -31,11 +31,14 @@ void setup() {
 }
 
 void readMap() {
-  int index=1;
+  int index=2;
   lines=loadStrings("../maps/test.txt");
   mapsize=Integer.parseInt(lines[0]); //size of map defined in the .txt document
-  while(index < lines.length) {
-    for (char c : lines[index].toCharArray()) {
+  while(index < lines.length-1) {
+    //removes the "borders" from the map
+    String temp= lines[index].substring(1);
+    temp=temp.substring(0, temp.length()-1);
+    for (char c : temp.toCharArray()) {
       tiles.add(c);
     }
     index = index + 1;
@@ -43,16 +46,34 @@ void readMap() {
 }
 
 void drawMap(){
+  int tilesize= 500/mapsize; //mapsize now static, could be changed
+  int column=0;
+  int row=0;
   for(char tile: tiles){
     fill(0);
-    switch (tile){
-      case 'o' :ellipse(60,60,40,40);
-    }
+    if(tile=='o'){ellipse(tilesize*column+tilesize/2,tilesize*row+tilesize/2,60,60);} //hole
+    fill(#A5370C);
+    if(tile=='-'){rect(tilesize*column, tilesize*row,tilesize,5);} //horizontal wall up
+    if(tile=='_'){rect(tilesize*column, tilesize*row+tilesize,tilesize,5);} //horizontal wall down
+    if(tile=='|'){rect(tilesize*column, tilesize*row,5,tilesize);} //vertical wall left
+    if(tile=='/'){rect(tilesize*column+tilesize, tilesize*row,5,tilesize);} //vertical wall right
+    if(tile=='L'){rect(tilesize*column, tilesize*row,5,tilesize);rect(tilesize*column, tilesize*row+tilesize,tilesize,5);} //wall left and down
+    if(tile=='J'){rect(tilesize*column+tilesize, tilesize*row,5,tilesize);rect(tilesize*column, tilesize*row+tilesize,tilesize,5);} //wall right and down
+    column=(column+1)%5;
+    if(column==0){row+=1;} //next row
   }
+  
+  //for testing
+  /*
+  for(int i=0; i<=5;i++){
+    stroke(0);
+    line(tilesize*i,0,tilesize*i,500);
+    line(0, tilesize*i, 500,tilesize*i);
+  }*/
 }
 void draw() {
   background(#A5370C);
-  fill(255);
+  fill(255);  
   //kehys
   rect(5, 5, 490, 490);
   drawMap();
