@@ -54,7 +54,7 @@ void drawMap(){
   int row=0;
   for(char tile: tiles){
     fill(0);
-    if(tile=='o'){ellipse(tilesize*column+tilesize/2,tilesize*row+tilesize/2,60,60);} //hole
+    if(tile=='o'){ellipse(tilesize*column+tilesize/2,tilesize*row+tilesize/2,40,40);} //hole
     fill(#A5370C);
     if(tile=='-'){rect(tilesize*column, tilesize*row,tilesize,5);} //horizontal wall up
     if(tile=='_'){rect(tilesize*column, tilesize*row+tilesize,tilesize,5);} //horizontal wall down

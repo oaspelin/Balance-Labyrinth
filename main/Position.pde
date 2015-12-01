@@ -63,8 +63,9 @@ class Position {
       }
     }
     if (y>0) {
-      if ((tiles.get(x+mapsize*y-mapsize)=='L') && (ballY<=((y)*(500/mapsize+offSet)))) {
+      if ((tiles.get(x+mapsize*y-mapsize)=='L') && (ballY<=((y)*(500/mapsize)+offSet))) {
         vy=0;
+        println("hepp1");
       }
     }
     //J-shaped wall
@@ -84,8 +85,9 @@ class Position {
       }
     }
     if (y>0) {
-      if ((tiles.get(x+mapsize*y-mapsize)=='L') && (ballY<=((y)*(500/mapsize+offSet)))) {
+      if ((tiles.get(x+mapsize*y-mapsize)=='J') && (ballY<=((y)*(500/mapsize)+offSet))) {
         vy=0;
+        println(x, y);
       }
     }
   }
