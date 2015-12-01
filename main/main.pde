@@ -9,20 +9,23 @@ int vx;
 int vy;
 //for reading the .txt file
 String lines[];
-
+//size of the map in terms of tiles
+int mapsize;
 //list of all the characters from the .txt file
 ArrayList<Character> tiles = new ArrayList<Character>();
-//size of the map
-int mapsize;
+//position of the ball (x,y) used for collision detection
+Position position;
+
 
 void setup() {
   size(500, 500);
   background(255);
   ellipseMode(CENTER);
-
+  
   readMap();
-
+  
   //inits ball properties
+  position= new Position(0,0); //where the ball starts
   ballX=20;
   ballY=20;
   offSet=20;
@@ -94,6 +97,7 @@ void updateBall() {
   ballX+=vx;
   ballY+=vy;
   checkCollision();
+  position.update();
 }
 
 //only checks for borders atm
