@@ -25,7 +25,7 @@ void setup() {
   readMap();
 
   //inits ball properties
-  ball= new Ball(20, 20); //where the ball starts
+  ball= new Ball(40, 40); //where the ball starts
   offSet=20;
   vx=0;
   vy=0;
