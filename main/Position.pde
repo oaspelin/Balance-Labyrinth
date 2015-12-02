@@ -1,17 +1,37 @@
 //class for the ellipse
-class Position {
-  int x, y;
-  boolean locked, rotate, scale;
-  Position(int x, int y) {
-    this.x=x;
-    this.y=y;
+class Ball {
+  int x, y;//tile
+  int ballX, ballY; //coordinate
+  boolean locked;
+  Ball(int ballX, int ballY) {
+    this.ballX=ballX;
+    this.ballY=ballY;
+    this.x=0;
+    this.y=0;
   }
   void update() {
+    ballX+=vx;
+    ballY+=vy;
     x=ballX/(500/mapsize);
     y=ballY/(500/mapsize);
     this.checkCollision();
   }
+  //draws the ball
+  void drawBall() {
+    noStroke();
+    fill(#EA3232);
+    ellipse(ballX, ballY, 30, 30);
+    noFill();
+  }
   void checkCollision() {
+    //borders
+    if (ballX+offSet>=500 || ballX-offSet<=0) {
+      vx=0;
+    }
+    if (ballY+offSet>=500 || ballY-offSet<=0) {
+      vy=0;
+    }
+
     if (x<4) {//otherwise array out of bounds
       //wall to the right
       if ((tiles.get(x+mapsize*y+1)=='|') && (ballX>=((x+1)*(500/mapsize)-offSet+5))) {
@@ -65,7 +85,6 @@ class Position {
     if (y>0) {
       if ((tiles.get(x+mapsize*y-mapsize)=='L') && (ballY<=((y)*(500/mapsize)+offSet))) {
         vy=0;
-        println("hepp1");
       }
     }
     //J-shaped wall
@@ -87,7 +106,6 @@ class Position {
     if (y>0) {
       if ((tiles.get(x+mapsize*y-mapsize)=='J') && (ballY<=((y)*(500/mapsize)+offSet))) {
         vy=0;
-        println(x, y);
       }
     }
   }
