@@ -3,6 +3,7 @@ class Ball {
   int x, y;//tile
   int ballX, ballY; //coordinate
   boolean collisionRight, collisionLeft, collisionUp, collisionDown;
+  
   Ball(int ballX, int ballY) {
     this.ballX=ballX;
     this.ballY=ballY;
