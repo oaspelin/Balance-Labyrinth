@@ -1,8 +1,5 @@
 
-//ball positions
-//int ballX;
-//int ballY;
-//same in both x and y
+//offset of the ball
 int offSet;
 //velocity of the ball
 int vx;

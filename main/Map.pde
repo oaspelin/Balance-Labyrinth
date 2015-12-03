@@ -1,12 +1,13 @@
 //class for map graphics
 
 class Map {
-  int goalx, goaly, dim;
+  int goalx, goaly, dim, wallWidth;
 
   Map () {
     this.goalx=0;
     this.goaly=0;
     this.dim = 5;
+    this.wallWidth=5;
   }
 
   void findGoal() {
@@ -38,24 +39,24 @@ class Map {
       } //hole
       fill(#A5370C);
       if (tile=='-') {
-        rect(tilesize*column, tilesize*row, tilesize, 5);
+        rect(tilesize*column, tilesize*row, tilesize, wallWidth);
       } //horizontal wall up
       if (tile=='_') {
-        rect(tilesize*column, tilesize*row+tilesize, tilesize, 5);
+        rect(tilesize*column, tilesize*row+tilesize, tilesize, wallWidth);
       } //horizontal wall down
       if (tile=='|') {
-        rect(tilesize*column, tilesize*row, 5, tilesize);
+        rect(tilesize*column, tilesize*row, wallWidth, tilesize);
       } //vertical wall left
       if (tile=='/') {
-        rect(tilesize*column+tilesize, tilesize*row, 5, tilesize);
+        rect(tilesize*column+tilesize, tilesize*row, wallWidth, tilesize);
       } //vertical wall right
       if (tile=='L') {
-        rect(tilesize*column, tilesize*row, 5, tilesize);
+        rect(tilesize*column, tilesize*row, wallWidth, tilesize);
         rect(tilesize*column, tilesize*row+tilesize, tilesize, 5);
       } //wall left and down
       if (tile=='J') {
-        rect(tilesize*column+tilesize, tilesize*row, 5, tilesize);
-        rect(tilesize*column, tilesize*row+tilesize, tilesize, 5);
+        rect(tilesize*column+tilesize, tilesize*row, wallWidth, tilesize);
+        rect(tilesize*column, tilesize*row+tilesize, tilesize, wallWidth);
       } //goal
       if (tile == 'g') {
         fill(45, 33, 23);
