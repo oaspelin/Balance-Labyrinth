@@ -16,7 +16,7 @@ class Ball {
   }
   void update() {
     //this.direction();
-    this.checkHole();
+    //this.checkHole();
     this.checkCollision();
     this.move();
     x=min(ballX/(500/mapsize), mapsize-1);
@@ -82,7 +82,7 @@ class Ball {
         collisionUp=true;
       }
     }
-
+/*
     if (x<4) {//otherwise array out of bounds
       //wall to the right
       if ((tiles.get(x+mapsize*y+1)=='|') && (ballX>=((x+1)*(500/mapsize)-offSet+5))) {
@@ -158,22 +158,47 @@ class Ball {
       if ((tiles.get(x+mapsize*y-mapsize)=='J') && (ballY<=((y)*(500/mapsize)+offSet))) {
         collisionUp=true;
       }
-    }
+    }*/
     //not going through wall if the ball comes from the side
-    // from down vertical wall
-    if ((tiles.get(max(x+mapsize*(y-1), 0))=='|') && (ballY<=((y)*(500/mapsize)+offSet-5) && (ballX<=((x)*(500/mapsize))+offSet-1)&& ballX>=((x)*(500/mapsize)-offSet+1))) {
+    // from down vertical wall ('L' & '|')
+    if (((tiles.get(max(x+mapsize*(y-1), 0))=='|') || (tiles.get(max(x+mapsize*(y-1), 0))=='L'))
+        && (ballY<=((y)*(500/mapsize)+offSet-5) && (ballX<=((x)*(500/mapsize))+offSet-5)&& ballX>=((x)*(500/mapsize)-offSet+10))) {
       collisionUp=true;
     }
-    if ((tiles.get(max(x+mapsize*(y-1)+1, mapsize))=='|') && (ballY<=((y)*(500/mapsize)+offSet-5) && (ballX<=((x+1)*(500/mapsize))+offSet-1) && ballX>=((x+1)*(500/mapsize)-offSet+1))) {
+    if (((tiles.get(max(x+mapsize*(y-1)+1, mapsize))=='|') ||(tiles.get(max(x+mapsize*(y-1)+1, mapsize))=='L'))
+        && (ballY<=((y)*(500/mapsize)+offSet-5) && (ballX<=((x+1)*(500/mapsize))+offSet-5) && ballX>=((x+1)*(500/mapsize)-offSet+10))) {
       collisionUp=true;
     }
-    // from up vertical wall
-    if ((tiles.get(min(x+mapsize*(y+1), mapsize*mapsize-1))=='|') && (ballY>=((y+1)*(500/mapsize)-offSet+5) && (ballX<=((x)*(500/mapsize))+offSet-1)&& ballX>=((x)*(500/mapsize)-offSet+1))) {
+    // from up vertical wall ('L' & '|')
+    if (((tiles.get(min(x+mapsize*(y+1), mapsize*mapsize-1))=='|') || (tiles.get(min(x+mapsize*(y+1), mapsize*mapsize-1))=='L'))
+        && (ballY>=((y+1)*(500/mapsize)-offSet+5) && (ballX<=((x)*(500/mapsize))+offSet-5)&& ballX>=((x)*(500/mapsize)-offSet+10))) {
       collisionDown=true;
     }
-    if ((tiles.get(min(x+mapsize*(y+1)+1, mapsize*mapsize-1))=='|') && (ballY>=((y+1)*(500/mapsize)-offSet+5) && (ballX<=((x+1)*(500/mapsize))+offSet-1) && ballX>=((x+1)*(500/mapsize)-offSet+1))) {
+    if (((tiles.get(min(x+mapsize*(y+1)+1, mapsize*mapsize-1))=='|') ||(tiles.get(min(x+mapsize*(y+1)+1, mapsize*mapsize-1))=='|'))
+        && (ballY>=((y+1)*(500/mapsize)-offSet+5) && (ballX<=((x+1)*(500/mapsize))+offSet-5) && ballX>=((x+1)*(500/mapsize)-offSet+10))) {
       collisionDown=true;
     }
+    
+    // from down vertical wall ('/' & 'J')
+    if (((tiles.get(max(x+mapsize*(y-1), 0))=='J') || (tiles.get(max(x+mapsize*(y-1), 0))=='/'))
+        && (ballY<=((y)*(500/mapsize)+offSet-5) && (ballX<=((x+1)*(500/mapsize))+offSet-5)&& ballX>=((x+1)*(500/mapsize)-offSet+10))) {
+      collisionUp=true;
+    }
+    if (((tiles.get(max(x+mapsize*(y-1)-1, mapsize))=='J') ||(tiles.get(max(x+mapsize*(y-1)-1, 0))=='/'))
+        && (ballY<=((y)*(500/mapsize)+offSet-5) && (ballX<=((x)*(500/mapsize))+offSet-5) && ballX>=((x)*(500/mapsize)-offSet+10))) {
+      collisionUp=true;
+    }
+    // from up vertical wall ('/' & 'J')
+    if (((tiles.get(min(x+mapsize*(y+1), mapsize*mapsize-1))=='J') || (tiles.get(min(x+mapsize*(y+1), mapsize*mapsize-1))=='/'))
+        && (ballY>=((y+1)*(500/mapsize)-offSet+5) && (ballX<=((x+1)*(500/mapsize))+offSet-5)&& ballX>=((x+1)*(500/mapsize)-offSet+10))) {
+      collisionDown=true;
+    }
+    if (((tiles.get(min(x+mapsize*(y+1)-1, mapsize*mapsize-1))=='J') ||(tiles.get(min(x+mapsize*(y+1)-1, mapsize*mapsize-1))=='/'))
+        && (ballY>=((y+1)*(500/mapsize)-offSet+5) && (ballX<=((x)*(500/mapsize))+offSet-5) && ballX>=((x)*(500/mapsize)-offSet+10))) {
+      collisionDown=true;
+    }
+    
+ 
   }
 }
 
