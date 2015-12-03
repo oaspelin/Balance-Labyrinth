@@ -19,7 +19,7 @@ class Map {
         row += 1;
       } 
       col += 1;
-      
+
       if (tile == 'g') {
         goalx = col;
         goaly = row;
