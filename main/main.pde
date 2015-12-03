@@ -71,7 +71,7 @@ void draw() {
       readMap();
     }
   }
-  println(ball.x, ball.y, map.goalx, map.goaly);
+  //println(ball.x, ball.y, map.goalx, map.goaly);
 }
 
 

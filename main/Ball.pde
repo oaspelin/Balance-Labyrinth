@@ -16,10 +16,11 @@ class Ball {
   }
   void update() {
     this.direction();
+    this.checkHole();
     this.checkCollision();
     this.move();
-    x=max(0, ballX/(500/mapsize));
-    y=max(0, ballY/(500/mapsize));
+    x=min(ballX/(500/mapsize),mapsize-1);
+    y=min(ballY/(500/mapsize),mapsize-1);
   }
   //draws the ball
   void drawBall() {
@@ -48,6 +49,18 @@ class Ball {
   void direction() {
     vx=(mouseX-250)/40;
     vy=(mouseY-250)/40;
+  }
+  //checks if ball enters a holw
+  void checkHole(){
+    if(tiles.get(x+mapsize*y)=='o' &&
+      (ballX>=(x*500/mapsize*1.5+offSet) ||
+      ballX<=(x*500/mapsize*1.5-offSet) ||
+      ballY>=(y*500/mapsize+150) ||
+      ballY<=(y*500/mapsize*1.5-offSet))){
+        //resets ball to starting position
+        ballX=40;
+        ballY=40;
+      }
   }
   void checkCollision() {
     collisionRight=false;
