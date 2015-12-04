@@ -53,10 +53,10 @@ class Ball {
   //checks if ball enters a hole
   void checkHole() {
     if (tiles.get(x+mapsize*y)=='o' &&
-      ((ballX>=(x*500/mapsize+offSet*1.5) ||
-      ballX<=(x*500/mapsize-offSet*1.5)) &&
-      (ballY>=(y*500/mapsize+offSet*1.5) ||
-      ballY<=(y*500/mapsize-offSet*1.5)))) {
+      ((ballX>=(x*500/mapsize+offSet+10) &&
+      ballX<=(min(mapsize,(x+1))*500/mapsize-offSet-10)) &&
+      (ballY>=(y*500/mapsize+offSet+10) &&
+      ballY<=(min(mapsize,(y+1))*500/mapsize-offSet-10)))) {
       //resets ball to starting position
       ballX=40;
       ballY=40;

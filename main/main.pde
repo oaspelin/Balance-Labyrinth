@@ -1,4 +1,5 @@
-
+//draws menu if true
+boolean menu;
 //offset of the ball
 int offSet;
 //velocity of the ball
@@ -19,7 +20,8 @@ Map map;
 
 void setup() {
   size(500, 500);
-  background(255);
+  menu=true;
+  menuSetup();
   ellipseMode(CENTER);
   mapbg.add("../maps/test.txt");
   mapbg.add("../maps/test-graphics.txt");
@@ -46,26 +48,32 @@ void readMap() {
     index = index + 1;
   }
 }
-  //for testing
-  /*
+//for testing
+/*
   for(int i=0; i<=5;i++){
-   stroke(0);
-   line(tilesize*i,0,tilesize*i,500);
-   line(0, tilesize*i, 500,tilesize*i);
-   }*/
+ stroke(0);
+ line(tilesize*i,0,tilesize*i,500);
+ line(0, tilesize*i, 500,tilesize*i);
+ }*/
 
 void draw() {
-  background(#A5370C);
-  fill(255);  
-  //kehys
-  rect(5, 5, 490, 490);
-  map.drawMap();
-  ball.update();
-  ball.drawBall();
-  if (ball.x == map.goalx && ball.y == map.goaly) {
-    mapnum +=1;
-    if (mapnum < mapbg.size()) {
-      readMap();
+  background(255);
+  if (menu) {
+    menuDraw();
+  }//Draws menu
+  else {
+    background(#A5370C);
+    fill(255);  
+    //kehys
+    rect(5, 5, 490, 490);
+    map.drawMap();
+    ball.update();
+    ball.drawBall();
+    if (ball.x == map.goalx && ball.y == map.goaly) {
+      mapnum +=1;
+      if (mapnum < mapbg.size()) {
+        readMap();
+      }
     }
   }
   //println(ball.x, ball.y, map.goalx, map.goaly);
