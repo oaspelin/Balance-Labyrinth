@@ -47,16 +47,47 @@ class Ball {
   }
 
   void direction() {
-    vx=(mouseX-250)/40;
-    vy=(mouseY-250)/40;
+    boolean scale = false;
+    int coeff_scale = 2;
+    int coeff_noscale = 100;
+
+    float pressure_pad_1 = arduino.analogRead(0);
+    float pressure_pad_2 = arduino.analogRead(1);
+    float pressure_pad_3 = arduino.analogRead(2);
+    float pressure_pad_4 = arduino.analogRead(4);
+
+    float weigth_left = pressure_pad_1 + pressure_pad_2;
+    float weigth_right = pressure_pad_3 + pressure_pad_4;
+    float weigth_up = pressure_pad_1 + pressure_pad_4;
+    float weigth_down = pressure_pad_2 + pressure_pad_3;
+
+    vx = int(weigth_right - weigth_left);
+    vy = int(weigth_down - weigth_up);
+
+    if (scale) {
+      float vx_0to2 = vx * 2 / 1024.0;
+      float vy_0to2 = vy * 2 / 1024.0;
+      float scaled_vx = pow(vx_0to2, 2) * coeff_scale;
+      float scaled_vy = pow(vy_0to2, 2) * coeff_scale;
+
+      if (vx < 0) scaled_vx *= -1;
+      if (vy < 0) scaled_vy *= -1;
+
+      vx = int(scaled_vx);
+      vy = int(scaled_vy);
+    } else {
+      vx /= coeff_noscale;
+      vy /= coeff_noscale;
+    }
   }
+
   //checks if ball enters a hole
   void checkHole() {
     if (tiles.get(x+mapsize*y)=='o' &&
       ((ballX>=(x*500/mapsize+offSet+10) &&
-      ballX<=(min(mapsize,(x+1))*500/mapsize-offSet-10)) &&
+      ballX<=(min(mapsize, (x+1))*500/mapsize-offSet-10)) &&
       (ballY>=(y*500/mapsize+offSet+10) &&
-      ballY<=(min(mapsize,(y+1))*500/mapsize-offSet-10)))) {
+      ballY<=(min(mapsize, (y+1))*500/mapsize-offSet-10)))) {
       //resets ball to starting position
       ballX=40;
       ballY=40;
@@ -237,4 +268,3 @@ class Ball {
     }
   }
 }
-

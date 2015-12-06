@@ -1,5 +1,3 @@
-
-
 Button[] menuButtons;
 
 void menuSetup() {
@@ -64,4 +62,3 @@ class Button {
     else return false;
   }
 }
-

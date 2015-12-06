@@ -1,3 +1,7 @@
+import processing.serial.*;
+import cc.arduino.*;
+Arduino arduino;
+
 //draws menu if true
 boolean menu;
 //offset of the ball
@@ -19,6 +23,7 @@ Map map;
 
 
 void setup() {
+  arduino = new Arduino(this, Arduino.list()[1], 57600);
   size(500, 500);
   menu=true;
   menuSetup();
