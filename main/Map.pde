@@ -21,13 +21,12 @@ class Map {
       col += 1;
 
       if (tile == 'g') {
-        goalx = col;
+        goalx = col - 1;
         goaly = row;
       }
     }
   }
-
-
+  
   void drawMap() {
     int tilesize= 500/mapsize; //mapsize now static, could be changed
     int column=0;
@@ -60,12 +59,10 @@ class Map {
       } //goal
       if (tile == 'g') {
         fill(45, 33, 23);
-        ellipse(tilesize*column+tilesize/2, tilesize*row+tilesize/2, 40, 40);
+        rect(tilesize*column+tilesize/2, tilesize*row+tilesize/2, 40, 40);
         findGoal();
         fill(255);
       }
-
-
 
       //wall right and down
       column=(column+1)%5;
@@ -75,4 +72,3 @@ class Map {
     }
   }
 }
-

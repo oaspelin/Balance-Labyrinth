@@ -1,3 +1,6 @@
+import shapes3d.*;
+import shapes3d.animation.*;
+import shapes3d.utils.*;
 import processing.serial.*;
 import cc.arduino.*;
 
@@ -23,14 +26,14 @@ Arduino arduino;
 boolean use_board = false;
 
 void setup() {
-  arduino = new Arduino(this, Arduino.list()[1], 57600);
+  //arduino = new Arduino(this, Arduino.list()[1], 57600);
   
-  size(500, 500);
+  size(500, 500,P3D);
   menu=true;
   menuSetup();
   ellipseMode(CENTER);
-  mapbg.add("../maps/test.txt");
-  mapbg.add("../maps/test-graphics.txt");
+  mapbg.add("../maps/map1.txt");
+  mapbg.add("../maps/map2.txt");
   map = new Map();
   readMap();
   //inits ball properties
@@ -76,11 +79,14 @@ void draw() {
     ball.update();
     ball.drawBall();
     if (ball.x == map.goalx && ball.y == map.goaly) {
+      println("test");
       mapnum +=1;
       if (mapnum < mapbg.size()) {
         readMap();
-      }
+      } else { 
+        print("");
     }
+   }
   }
   //println(ball.x, ball.y, map.goalx, map.goaly);
 }

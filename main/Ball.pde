@@ -24,10 +24,11 @@ class Ball {
   }
   //draws the ball
   void drawBall() {
+    translate(ballX, ballY, 0);
+    lights();
     noStroke();
-    fill(#EA3232);
-    ellipse(ballX, ballY, 30, 30);
-    noFill();
+    fill(255, 40, 22);
+    sphere(20);
   }
   void move() {
     if (collisionRight && vx>=0) {
