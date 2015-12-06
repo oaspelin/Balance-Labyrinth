@@ -1,6 +1,5 @@
 import processing.serial.*;
 import cc.arduino.*;
-Arduino arduino;
 
 //draws menu if true
 boolean menu;
@@ -20,10 +19,12 @@ ArrayList<String> mapbg = new ArrayList<String>();
 //position of the ball (x,y) used for collision detection
 Ball ball;
 Map map;
-
+Arduino arduino;
+boolean use_board = false;
 
 void setup() {
   arduino = new Arduino(this, Arduino.list()[1], 57600);
+  
   size(500, 500);
   menu=true;
   menuSetup();
