@@ -24,16 +24,20 @@ Ball ball;
 Map map;
 Arduino arduino;
 boolean use_board = false;
+PImage bg;
+int y;
 
 void setup() {
   //arduino = new Arduino(this, Arduino.list()[1], 57600);
   
   size(500, 500,P3D);
+  bg = loadImage("../backgrounds/white-bg.jpg");
   menu=true;
   menuSetup();
   ellipseMode(CENTER);
   mapbg.add("../maps/map1.txt");
   mapbg.add("../maps/map2.txt");
+  mapbg.add("../maps/map3.txt");
   map = new Map();
   readMap();
   //inits ball properties
@@ -45,6 +49,7 @@ void setup() {
 
 void readMap() {
   int index = 2;
+  tiles = new ArrayList<Character>();
   lines = loadStrings(mapbg.get(mapnum));
   mapsize = Integer.parseInt(lines[0]); //size of map defined in the .txt document
   while (index < lines.length-1) {
@@ -71,10 +76,7 @@ void draw() {
     menuDraw();
   }//Draws menu
   else {
-    background(#A5370C);
-    fill(255);  
-    //kehys
-    rect(5, 5, 490, 490);
+    background(bg);
     map.drawMap();
     ball.update();
     ball.drawBall();
@@ -83,6 +85,7 @@ void draw() {
       mapnum +=1;
       if (mapnum < mapbg.size()) {
         readMap();
+        
       } else { 
         print("");
     }
