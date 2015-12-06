@@ -24,14 +24,14 @@ Ball ball;
 Map map;
 Arduino arduino;
 boolean use_board = false;
-PImage bg;
-int y;
+PImage bg1, bg2;
 
 void setup() {
   //arduino = new Arduino(this, Arduino.list()[1], 57600);
   
   size(500, 500,P3D);
-  bg = loadImage("../backgrounds/white-bg.jpg");
+  bg1 = loadImage("../backgrounds/white-bg.jpg");
+  bg2 = loadImage("../backgrounds/wooden-bg.jpg");
   menu=true;
   menuSetup();
   ellipseMode(CENTER);
@@ -76,7 +76,12 @@ void draw() {
     menuDraw();
   }//Draws menu
   else {
-    background(bg);
+    if (mapnum == 1) {
+      background(bg1);
+    } else if (mapnum == 2) {
+      background(bg2);
+    } else background(bg1);
+    
     map.drawMap();
     ball.update();
     ball.drawBall();
