@@ -1,3 +1,10 @@
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
 import shapes3d.*;
 import shapes3d.animation.*;
 import shapes3d.utils.*;
@@ -25,6 +32,8 @@ Map map;
 Arduino arduino;
 boolean use_board = false;
 PImage bg1, bg2;
+AudioPlayer player;
+Minim minim;//audio context
 
 void setup() {
   //arduino = new Arduino(this, Arduino.list()[5], 57600);
@@ -44,6 +53,9 @@ void setup() {
   offSet=20;
   vx=0;
   vy=0;
+  minim = new Minim(this);
+  player = minim.loadFile("../music/Happy.mp3");
+  player.play();
 }
 
 void readMap() {
@@ -96,6 +108,13 @@ void draw() {
    }
   }
   //println(ball.x, ball.y, map.goalx, map.goaly);
+}
+
+void stop()
+{
+  player.close();
+  minim.stop();
+  super.stop();
 }
 
 
