@@ -23,6 +23,8 @@ void displayMenu() {
 void mousePressed() {
   if (menuButtons[0].containsMouse()) {
     menu=false;
+    inGoal=false;
+    startTime();
   }
   if (menuButtons[1].containsMouse()) {
     //implement

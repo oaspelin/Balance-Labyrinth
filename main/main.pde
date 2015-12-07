@@ -6,6 +6,7 @@ import cc.arduino.*;
 
 //draws menu if true
 boolean menu;
+boolean inGoal;
 //offset of the ball
 int offSet;
 //velocity of the ball
@@ -75,6 +76,9 @@ void draw() {
   if (menu) {
     menuDraw();
   }//Draws menu
+  else if (inGoal){
+    Goal();
+  }
   else {
     if (mapnum == 1) {
       background(bg1);
@@ -86,7 +90,9 @@ void draw() {
     ball.update();
     ball.drawBall();
     if (ball.x == map.goalx && ball.y == map.goaly) {
-      println("test");
+      stopTime();
+      inGoal = true;
+      //println("test");
       mapnum +=1;
       if (mapnum < mapbg.size()) {
         readMap();
