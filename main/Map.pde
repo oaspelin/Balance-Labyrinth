@@ -43,24 +43,24 @@ class Map {
       fill(#A5370C);
       if (tile=='-') {
         //image(wall,tilesize*column, tilesize*row);
-        rect(tilesize*column, tilesize*row, tilesize, wallWidth);
+        image(wall, tilesize*column, tilesize*row, tilesize, wallWidth);
       } //horizontal wall up
       if (tile=='_') {
-        rect(tilesize*column, tilesize*row+tilesize, tilesize, wallWidth);
+        image(wall, tilesize*column, tilesize*row+tilesize, tilesize, wallWidth);
       } //horizontal wall down
       if (tile=='|') {
-        rect(tilesize*column, tilesize*row, wallWidth, tilesize);
+        image(wall, tilesize*column, tilesize*row, wallWidth, tilesize);
       } //vertical wall left
       if (tile=='/') {
-        rect(tilesize*column+tilesize, tilesize*row, wallWidth, tilesize);
+        image(wall, tilesize*column+tilesize, tilesize*row, wallWidth, tilesize);
       } //vertical wall right
       if (tile=='L') {
-        rect(tilesize*column, tilesize*row, wallWidth, tilesize);
-        rect(tilesize*column, tilesize*row+tilesize, tilesize, 5);
+        image(wall, tilesize*column, tilesize*row, wallWidth, tilesize);
+        image(wall, tilesize*column, tilesize*row+tilesize, tilesize, 5);
       } //wall left and down
       if (tile=='J') {
-        rect(tilesize*column+tilesize, tilesize*row, wallWidth, tilesize);
-        rect(tilesize*column, tilesize*row+tilesize, tilesize, wallWidth);
+        image(wall, tilesize*column+tilesize, tilesize*row, wallWidth, tilesize);
+        image(wall, tilesize*column, tilesize*row+tilesize, tilesize, wallWidth);
       } //goal
       if (tile == 'g') {
         translate(0, -50);
