@@ -1,89 +1,104 @@
+import shapes3d.*;
+import shapes3d.animation.*;
+import shapes3d.utils.*;
+import processing.serial.*;
+import cc.arduino.*;
 
-//ball positions
-int ballX;
-int ballY;
-//same in both x and y
+//draws menu if true
+boolean menu;
+//offset of the ball
 int offSet;
 //velocity of the ball
 int vx;
 int vy;
 //for reading the .txt file
 String lines[];
-
+//size of the map in terms of tiles
+int mapsize;
+int mapnum;
 //list of all the characters from the .txt file
 ArrayList<Character> tiles = new ArrayList<Character>();
-//size of the map
-int mapsize;
+ArrayList<String> mapbg = new ArrayList<String>();
+//position of the ball (x,y) used for collision detection
+Ball ball;
+Map map;
+Arduino arduino;
+boolean use_board = false;
+PImage bg1, bg2;
 
 void setup() {
-  size(500, 500);
-  background(255);
+  //arduino = new Arduino(this, Arduino.list()[1], 57600);
+  
+  size(500, 500,P3D);
+  bg1 = loadImage("../backgrounds/white-bg.jpg");
+  bg2 = loadImage("../backgrounds/wooden-bg.jpg");
+  menu=true;
+  menuSetup();
   ellipseMode(CENTER);
-
+  mapbg.add("../maps/map1.txt");
+  mapbg.add("../maps/map2.txt");
+  mapbg.add("../maps/map3.txt");
+  map = new Map();
   readMap();
-
   //inits ball properties
-  ballX=20;
-  ballY=20;
+  ball = new Ball(40, 40); //where the ball starts
   offSet=20;
   vx=0;
   vy=0;
 }
 
 void readMap() {
-  int index=1;
-  lines=loadStrings("../maps/test.txt");
-  mapsize=Integer.parseInt(lines[0]); //size of map defined in the .txt document
-  while(index < lines.length) {
-    for (char c : lines[index].toCharArray()) {
+  int index = 2;
+  tiles = new ArrayList<Character>();
+  lines = loadStrings(mapbg.get(mapnum));
+  mapsize = Integer.parseInt(lines[0]); //size of map defined in the .txt document
+  while (index < lines.length-1) {
+    //removes the "borders" from the map
+    String temp= lines[index].substring(1);
+    temp=temp.substring(0, temp.length()-1);
+    for (char c : temp.toCharArray ()) {
       tiles.add(c);
     }
     index = index + 1;
   }
 }
+//for testing
+/*
+  for(int i=0; i<=5;i++){
+ stroke(0);
+ line(tilesize*i,0,tilesize*i,500);
+ line(0, tilesize*i, 500,tilesize*i);
+ }*/
 
-void drawMap(){
-  for(char tile: tiles){
-    fill(0);
-    switch (tile){
-      case 'o' :ellipse(60,60,40,40);
-    }
-  }
-}
 void draw() {
-  background(#A5370C);
-  fill(255);
-  //kehys
-  rect(5, 5, 490, 490);
-  drawMap();
-  drawBall();
-}
-
-//draws the ball
-void drawBall() {
-  noStroke();
-  fill(#EA3232);
-  updateBall();
-  ellipse(ballX, ballY, 30, 30);
-  noFill();
-}
-
-//updates ball coordinates
-void updateBall() {
-  ballX+=vx;
-  ballY+=vy;
-  checkCollision();
-}
-
-//only checks for borders atm
-void checkCollision() {
-  if (ballX+offSet>=500 || ballX-offSet<=0) {
-    vx=0;
+  background(255);
+  if (menu) {
+    menuDraw();
+  }//Draws menu
+  else {
+    if (mapnum == 1) {
+      background(bg1);
+    } else if (mapnum == 2) {
+      background(bg2);
+    } else background(bg1);
+    
+    map.drawMap();
+    ball.update();
+    ball.drawBall();
+    if (ball.x == map.goalx && ball.y == map.goaly) {
+      println("test");
+      mapnum +=1;
+      if (mapnum < mapbg.size()) {
+        readMap();
+        
+      } else { 
+        print("");
+    }
+   }
   }
-  if (ballY+offSet>=500 || ballY-offSet<=0) {
-    vy=0;
-  }
+  //println(ball.x, ball.y, map.goalx, map.goaly);
 }
+
 
 //control of the ball
 void keyPressed() {
