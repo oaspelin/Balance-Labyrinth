@@ -2,6 +2,8 @@
 
 class Map {
   int goalx, goaly, dim, wallWidth;
+  PImage goal;
+  PImage wall;
 
   Map () {
     this.goalx=0;
@@ -28,6 +30,8 @@ class Map {
   }
   
   void drawMap() {
+    goal = loadImage("../backgrounds/goal.jpg");
+    wall = loadImage("../backgrounds/wall.jpg");
     int tilesize= 500/mapsize; //mapsize now static, could be changed
     int column=0;
     int row=0;
@@ -38,6 +42,7 @@ class Map {
       } //hole
       fill(#A5370C);
       if (tile=='-') {
+        //image(wall,tilesize*column, tilesize*row);
         rect(tilesize*column, tilesize*row, tilesize, wallWidth);
       } //horizontal wall up
       if (tile=='_') {
@@ -58,8 +63,10 @@ class Map {
         rect(tilesize*column, tilesize*row+tilesize, tilesize, wallWidth);
       } //goal
       if (tile == 'g') {
-        fill(45, 33, 23);
-        rect(tilesize*column+tilesize/2, tilesize*row+tilesize/2, 40, 40);
+        translate(0, -50);
+        image(goal,tilesize*column+tilesize/2, tilesize*row+tilesize/2);
+        translate(0, 50);
+        //rect(tilesize*column+tilesize/2, tilesize*row+tilesize/2, 40, 40);
         findGoal();
         fill(255);
       }

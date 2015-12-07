@@ -1,16 +1,19 @@
 Button[] menuButtons;
+PImage menubg;
 
 void menuSetup() {
   menuButtons = new Button[3];
-  menuButtons[0] = new Button("Play", new PVector(250, 130), 32);
-  menuButtons[1] = new Button("Choose Map", new PVector(250, 230), 32);
-  menuButtons[2] = new Button("Calibrate", new PVector(250, 330), 32);
+  menuButtons[0] = new Button("Play", new PVector(250, 180), 30);
+  menuButtons[1] = new Button("Choose Map", new PVector(250, 280), 30);
+  menuButtons[2] = new Button("Calibrate", new PVector(250, 380), 30);
+  menubg = loadImage("../backgrounds/menu.jpg");
 }
 
 void menuDraw() {
-  background(#F09138);
+  background(menubg);
   textSize(50);
-  text("Balance Labyrinth", 250, 70);
+  fill(255);
+  //text("Balance Labyrinth", 250, 70);
   displayMenu();
 }
 
@@ -34,13 +37,13 @@ void mousePressed() {
 
 class Button {
   PVector pos;
-  color textColor;
+  //color textColor;
   float size;
   String text;
 
   Button(String text, PVector pos, float size) {
     this.pos = pos;
-    this.textColor = textColor;
+    //this.textColor = 255;
     this.size = size;
     this.text = text;
     textSize(size);
@@ -49,11 +52,12 @@ class Button {
 
   void draw() {
     textSize(size);
-    fill(#983F3F);
+    noStroke();
+    fill(41, 191, 191, 200);
     if (containsMouse()) rect(pos.x-120, pos.y-20, 240, 90);
     else rect(pos.x-110, pos.y-10, 220, 70);
-    fill(0);
-    text(text, pos.x, pos.y + size);
+    fill(255);
+    text(text, pos.x, pos.y + size + 5);
   }
 
   boolean containsMouse() {

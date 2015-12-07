@@ -27,7 +27,7 @@ class Ball {
     translate(ballX, ballY, 0);
     lights();
     noStroke();
-    fill(255, 40, 22);
+    fill(1,200,255);
     sphere(20);
   }
   void move() {
