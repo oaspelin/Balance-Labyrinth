@@ -94,9 +94,9 @@ class Ball {
       ballX<=(min(mapsize, (x+1))*(screenWidth-mapOffsetX*2)/mapsize-offSet-10+mapOffsetX)) &&
       (ballY>=(y*(screenWidth-mapOffsetY*2)/mapsize+offSet+10+mapOffsetY) &&
       ballY<=(min(mapsize, (y+1))*(screenWidth-mapOffsetY*2)/mapsize-offSet-10+mapOffsetY)))) {
-      //resets ball to starting position
-      x=0;
-      y=0;
+      //resets ball to starting position of the map
+      x=previousGoalX;
+      y=previousGoalY;
       ballX=x*(screenWidth/mapsize)+mapOffsetX+min(screenWidth/mapsize, 100)/2;
       ballY=y*(screenWidth/mapsize)+mapOffsetY+min(screenWidth/mapsize, 100)/2;
     }
@@ -189,7 +189,7 @@ class Ball {
         }
       }
       //J-shaped wall
-      if (x>1) {//otherwise array out of bounds
+      if (x>0) {//otherwise array out of bounds
         //wall to the left
         if ((tiles.get(x+mapsize*y-1)=='J') && (ballX<=((x)*((screenWidth-mapOffsetX*2)/mapsize)+offSet+mapOffsetX))) {
           collisionLeft=true;

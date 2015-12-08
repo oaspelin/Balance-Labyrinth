@@ -37,6 +37,8 @@ Minim minim;//audio context
 int screenWidth;
 int mapOffsetX;
 int mapOffsetY;
+int previousGoalX;
+int previousGoalY;
 
 void setup() {
   screenWidth=displayHeight;
@@ -44,9 +46,9 @@ void setup() {
   //arduino = new Arduino(this, Arduino.list()[5], 57600);
   bg1 = loadImage("../backgrounds/wooden-bg.jpg");
   bg2  = loadImage("../backgrounds/white-bg.jpg");
-  bg2.resize(600,600);
+  bg2.resize(600, 600);
   bg3 = loadImage("../backgrounds/bigger.jpg");
-  bg3.resize(700,700);
+  bg3.resize(700, 700);
   menu=true;
   menuSetup();
   ellipseMode(CENTER);
@@ -93,7 +95,7 @@ void draw() {
   if (menu) {
     menuDraw();
   }//Draws menu
-  else {
+  else{
     if (mapnum == 0) {
       mapOffsetX=screenWidth/2-bg1.width/2;
       mapOffsetY=screenWidth/2-bg1.width/2;
@@ -107,23 +109,30 @@ void draw() {
       mapOffsetY=screenWidth/2-bg3.width/2;
       image(bg3, mapOffsetX, mapOffsetY);
     }
-
     map.drawMap();
     ball.update();
+    checkMapCompleted();
     ball.drawBall();
-    if (ball.x == map.goalx && ball.y == map.goaly) {
-      println("test");
-      ball.x=0;
-      ball.y=0;
-      mapnum +=1;
-      if (mapnum < mapbg.size()) {
-        readMap();
-      } else { 
-        print("");
-      }
-    }
   }
   //println(ball.x, ball.y, map.goalx, map.goaly);
+}
+
+
+boolean checkMapCompleted() {
+  boolean ret=false;
+  if (ball.x == map.goalx && ball.y == map.goaly) {
+    println("test");
+    mapnum +=1;
+    ret=true;
+    if (mapnum < mapbg.size()) {
+      readMap();
+    } else { 
+      print("");
+    }
+    previousGoalX=map.goalx+1;
+    previousGoalY=map.goaly+1;
+  }
+  return ret;
 }
 
 void stop()
