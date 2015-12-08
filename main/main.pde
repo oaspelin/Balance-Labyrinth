@@ -13,6 +13,8 @@ import cc.arduino.*;
 
 //draws menu if true
 boolean menu;
+//draws "mapMenu"
+boolean mapMenu;
 //offset of the ball
 int offSet;
 //velocity of the ball
@@ -43,7 +45,7 @@ int previousGoalY;
 void setup() {
   screenWidth=displayHeight;
   print(displayHeight, displayWidth);
-  size(displayHeight,displayWidth, P3D);
+  size(displayHeight, displayWidth, P3D);
   //arduino = new Arduino(this, Arduino.list()[5], 57600);
   bg1 = loadImage("../backgrounds/wooden-bg.jpg");
   bg2  = loadImage("../backgrounds/white-bg.jpg");
@@ -51,9 +53,11 @@ void setup() {
   bg3 = loadImage("../backgrounds/bigger.jpg");
   bg3.resize(700, 700);
   ground = loadImage("../backgrounds/ground.jpg");
-  ground.resize(displayHeight,displayWidth);
+  ground.resize(displayHeight, displayWidth);
   menu=true;
   menuSetup();
+  mapMenu=false;
+  mapMenuSetup();
   ellipseMode(CENTER);
   mapbg.add("../maps/map1.txt");
   mapbg.add("../maps/map2.txt");
@@ -98,7 +102,9 @@ void draw() {
   if (menu) {
     menuDraw();
   }//Draws menu
-  else{
+  else if (mapMenu) { //"mapmenu"
+    mapMenuDraw();
+  } else {
     if (mapnum == 0) {
       mapOffsetX=screenWidth/2-bg1.width/2;
       mapOffsetY=screenWidth/2-bg1.width/2;
@@ -126,17 +132,17 @@ boolean checkMapCompleted() {
   if (ball.x == map.goalx && ball.y == map.goaly) {
     mapnum +=1;
     ret=true;
-    println(map.goalx,map.goaly);
+    println(map.goalx, map.goaly);
     if (mapnum < mapbg.size()) {
       readMap();
     } else { 
       menu=true;
       mapnum=0;
       readMap();
-      ball= new Ball(0,0);
+      ball= new Ball(0, 0);
     }
-   ball.x=0;
-   ball.y=0;
+    ball.x=0;
+    ball.y=0;
   }
   return ret;
 }
