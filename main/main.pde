@@ -36,8 +36,8 @@ AudioPlayer player;
 Minim minim;//audio context
 
 void setup() {
-  //arduino = new Arduino(this, Arduino.list()[5], 57600);
   size(500, 500, P3D);
+  //arduino = new Arduino(this, Arduino.list()[5], 57600);
   bg1 = loadImage("../backgrounds/white-bg.jpg");
   bg2 = loadImage("../backgrounds/wooden-bg.jpg");
   menu=true;
