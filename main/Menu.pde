@@ -6,7 +6,7 @@ void menuSetup() {
   menuButtons[0] = new Button("Play", new PVector(screenWidth/2, 180+(screenWidth-500)/2), 30);
   menuButtons[1] = new Button("Choose Map", new PVector(screenWidth/2, 280+(screenWidth-500)/2), 30);
   menuButtons[2] = new Button("Calibrate", new PVector(screenWidth/2, 380+(screenWidth-500)/2), 30);
-  menubg = loadImage("../backgrounds/menu.jpg");
+  menubg = loadImage("../backgrounds/wooden_menu.jpg");
   menubg.resize(screenWidth,screenWidth);
 }
 

@@ -31,7 +31,7 @@ Ball ball;
 Map map;
 Arduino arduino;
 boolean use_board = false;
-PImage bg1, bg2, bg3;
+PImage bg1, bg2, bg3, ground;
 AudioPlayer player;
 Minim minim;//audio context
 int screenWidth;
@@ -42,13 +42,16 @@ int previousGoalY;
 
 void setup() {
   screenWidth=displayHeight;
-  size(screenWidth, screenWidth, P3D);
+  print(displayHeight, displayWidth);
+  size(displayHeight,displayWidth, P3D);
   //arduino = new Arduino(this, Arduino.list()[5], 57600);
   bg1 = loadImage("../backgrounds/wooden-bg.jpg");
   bg2  = loadImage("../backgrounds/white-bg.jpg");
   bg2.resize(600, 600);
   bg3 = loadImage("../backgrounds/bigger.jpg");
   bg3.resize(700, 700);
+  ground = loadImage("../backgrounds/ground.jpg");
+  ground.resize(displayHeight,displayWidth);
   menu=true;
   menuSetup();
   ellipseMode(CENTER);
@@ -91,7 +94,7 @@ void readMap() {
  }*/
 
 void draw() {
-  background(255);
+  background(ground);
   if (menu) {
     menuDraw();
   }//Draws menu
