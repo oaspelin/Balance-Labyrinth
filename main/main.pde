@@ -31,7 +31,7 @@ Ball ball;
 Map map;
 Arduino arduino;
 boolean use_board = false;
-PImage bg1, bg2;
+PImage bg1, bg2, bg3;
 AudioPlayer player;
 Minim minim;//audio context
 int screenWidth;
@@ -42,8 +42,11 @@ void setup() {
   screenWidth=displayHeight;
   size(screenWidth, screenWidth, P3D);
   //arduino = new Arduino(this, Arduino.list()[5], 57600);
-  bg1 = loadImage("../backgrounds/white-bg.jpg");
-  bg2 = loadImage("../backgrounds/wooden-bg.jpg");
+  bg1 = loadImage("../backgrounds/wooden-bg.jpg");
+  bg2  = loadImage("../backgrounds/white-bg.jpg");
+  bg2.resize(600,600);
+  bg3 = loadImage("../backgrounds/bigger.jpg");
+  bg3.resize(700,700);
   menu=true;
   menuSetup();
   ellipseMode(CENTER);
@@ -91,25 +94,34 @@ void draw() {
     menuDraw();
   }//Draws menu
   else {
-    if (mapnum == 1) {
-      image(bg1, screenWidth/2-250,screenWidth/6);
-    } else if (mapnum == 2) {
-      image(bg2, screenWidth/2-250,screenWidth/6);
-    } else image(bg1, screenWidth/2-250,screenWidth/6);
-    
+    if (mapnum == 0) {
+      mapOffsetX=screenWidth/2-bg1.width/2;
+      mapOffsetY=screenWidth/2-bg1.width/2;
+      image(bg1, mapOffsetX, mapOffsetY);
+    } else if (mapnum == 1) {
+      mapOffsetX=screenWidth/2-bg2.width/2;
+      mapOffsetY=screenWidth/2-bg2.width/2;
+      image(bg2, mapOffsetX, mapOffsetY);
+    } else {
+      mapOffsetX=screenWidth/2-bg3.width/2;
+      mapOffsetY=screenWidth/2-bg3.width/2;
+      image(bg3, mapOffsetX, mapOffsetY);
+    }
+
     map.drawMap();
     ball.update();
     ball.drawBall();
     if (ball.x == map.goalx && ball.y == map.goaly) {
       println("test");
+      ball.x=0;
+      ball.y=0;
       mapnum +=1;
       if (mapnum < mapbg.size()) {
         readMap();
-        
       } else { 
         print("");
+      }
     }
-   }
   }
   //println(ball.x, ball.y, map.goalx, map.goaly);
 }

@@ -7,11 +7,12 @@ void menuSetup() {
   menuButtons[1] = new Button("Choose Map", new PVector(screenWidth/2, 280+(screenWidth-500)/2), 30);
   menuButtons[2] = new Button("Calibrate", new PVector(screenWidth/2, 380+(screenWidth-500)/2), 30);
   menubg = loadImage("../backgrounds/menu.jpg");
+  menubg.resize(screenWidth,screenWidth);
 }
 
 void menuDraw() {
   background(0);
-  image(menubg,screenWidth/2-250,(screenWidth-500)/2);
+  image(menubg,0,0);
   textSize(50);
   fill(255);
   //text("Balance Labyrinth", 250, 70);

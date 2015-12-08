@@ -1,8 +1,10 @@
-5
-------
-|b|  -|
-|b||L-|
-|o|gb-|
-|bJo  |
-| |b--|
------
+7
+-----------
+|/bbbbbb|
+|/bbbJbb|
+|/bbbbbb|
+|_bbobbb|
+|bbbbbbb|
+|bgbbbbb|
+|bbbbbbb|
+------------
