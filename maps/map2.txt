@@ -1,9 +1,9 @@
 6
 ------
-|bb|  -|
-|bb||L-|
-|bo|gb-|
-|bJo  b|
-|  b--b|
-|Jobbb-|
------
+|bb/obg|
+|b-||-b|
+|J/bbbo|
+|o/o--b|
+|/bb---|
+|bbo|o-|
+------
