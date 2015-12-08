@@ -128,7 +128,8 @@ boolean checkMapCompleted() {
       readMap();
     } else { 
       menu=true;
-      mapnum=1;
+      mapnum=0;
+      readMap();
       ball= new Ball(0,0);
     }
    ball.x=0;
