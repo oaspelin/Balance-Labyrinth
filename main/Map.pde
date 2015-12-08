@@ -10,6 +10,7 @@ class Map {
     this.goaly=0;
     this.dim = 5;
     this.wallWidth=5;
+    
   }
 
   void findGoal() {
@@ -70,8 +71,10 @@ class Map {
         translate(0, -50);
         image(goal,tilesize*column+tilesize/2+mapOffsetX, tilesize*row+tilesize/2+mapOffsetY);
         translate(0, 50);
+        map.goalx=column;
+        map.goaly=row;
         //rect(tilesize*column+tilesize/2, tilesize*row+tilesize/2, 40, 40);
-        findGoal();
+        //findGoal();
         fill(255);
       }
 

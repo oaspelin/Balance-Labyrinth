@@ -97,8 +97,8 @@ class Ball {
       //resets ball to starting position of the map
       x=previousGoalX;
       y=previousGoalY;
-      ballX=x*(screenWidth/mapsize)+mapOffsetX+min(screenWidth/mapsize, 100)/2;
-      ballY=y*(screenWidth/mapsize)+mapOffsetY+min(screenWidth/mapsize, 100)/2;
+      ballX=x*(screenWidth/mapsize)+mapOffsetX+50;
+      ballY=y*(screenWidth/mapsize)+mapOffsetY+50;
     }
   }
   void checkCollision() {

@@ -121,16 +121,18 @@ void draw() {
 boolean checkMapCompleted() {
   boolean ret=false;
   if (ball.x == map.goalx && ball.y == map.goaly) {
-    println("test");
     mapnum +=1;
     ret=true;
+    println(map.goalx,map.goaly);
     if (mapnum < mapbg.size()) {
       readMap();
     } else { 
-      print("");
+      menu=true;
+      mapnum=1;
+      ball= new Ball(0,0);
     }
-    previousGoalX=map.goalx+1;
-    previousGoalY=map.goaly+1;
+   ball.x=0;
+   ball.y=0;
   }
   return ret;
 }
