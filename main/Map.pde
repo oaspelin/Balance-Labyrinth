@@ -32,39 +32,39 @@ class Map {
   void drawMap() {
     goal = loadImage("../backgrounds/goal.jpg");
     wall = loadImage("../backgrounds/wall.jpg");
-    int tilesize= 500/mapsize; //mapsize now static, could be changed
+    int tilesize= min(screenWidth/mapsize,100); //mapsize now static, could be changed
     int column=0;
     int row=0;
     for (char tile : tiles) {
       fill(0);
       if (tile=='o') {
-        ellipse(tilesize*column+tilesize/2, tilesize*row+tilesize/2, 40, 40);
+        ellipse(tilesize*column+tilesize/2+screenWidth/2-250, tilesize*row+tilesize/2+screenWidth/6, 40, 40);
       } //hole
       fill(#A5370C);
       if (tile=='-') {
         //image(wall,tilesize*column, tilesize*row);
-        image(wall, tilesize*column, tilesize*row, tilesize, wallWidth);
+        image(wall, tilesize*column+screenWidth/2-250, tilesize*row+screenWidth/6, tilesize, wallWidth);
       } //horizontal wall up
       if (tile=='_') {
-        image(wall, tilesize*column, tilesize*row+tilesize, tilesize, wallWidth);
+        image(wall, tilesize*column+screenWidth/2-250, tilesize*row+tilesize+screenWidth/6, tilesize, wallWidth);
       } //horizontal wall down
       if (tile=='|') {
-        image(wall, tilesize*column, tilesize*row, wallWidth, tilesize);
+        image(wall, tilesize*column+screenWidth/2-250, tilesize*row+screenWidth/6, wallWidth, tilesize);
       } //vertical wall left
       if (tile=='/') {
-        image(wall, tilesize*column+tilesize, tilesize*row, wallWidth, tilesize);
+        image(wall, tilesize*column+tilesize+screenWidth/2-250, tilesize*row+screenWidth/6, wallWidth, tilesize);
       } //vertical wall right
       if (tile=='L') {
-        image(wall, tilesize*column, tilesize*row, wallWidth, tilesize);
-        image(wall, tilesize*column, tilesize*row+tilesize, tilesize, 5);
+        image(wall, tilesize*column+screenWidth/2-250, tilesize*row+screenWidth/6, wallWidth, tilesize);
+        image(wall, tilesize*column+screenWidth/2-250, tilesize*row+tilesize+screenWidth/6, tilesize, 5);
       } //wall left and down
       if (tile=='J') {
-        image(wall, tilesize*column+tilesize, tilesize*row, wallWidth, tilesize);
-        image(wall, tilesize*column, tilesize*row+tilesize, tilesize, wallWidth);
+        image(wall, tilesize*column+tilesize+screenWidth/2-250, tilesize*row+screenWidth/6, wallWidth, tilesize);
+        image(wall, tilesize*column+screenWidth/2-250, tilesize*row+tilesize+screenWidth/6, tilesize, wallWidth);
       } //goal
       if (tile == 'g') {
         translate(0, -50);
-        image(goal,tilesize*column+tilesize/2, tilesize*row+tilesize/2);
+        image(goal,tilesize*column+tilesize/2+screenWidth/2-250, tilesize*row+tilesize/2+screenWidth/6);
         translate(0, 50);
         //rect(tilesize*column+tilesize/2, tilesize*row+tilesize/2, 40, 40);
         findGoal();
@@ -72,7 +72,7 @@ class Map {
       }
 
       //wall right and down
-      column=(column+1)%5;
+      column=(column+1)%mapsize;
       if (column==0) {
         row+=1;
       } //next row

@@ -3,14 +3,15 @@ PImage menubg;
 
 void menuSetup() {
   menuButtons = new Button[3];
-  menuButtons[0] = new Button("Play", new PVector(250, 180), 30);
-  menuButtons[1] = new Button("Choose Map", new PVector(250, 280), 30);
-  menuButtons[2] = new Button("Calibrate", new PVector(250, 380), 30);
+  menuButtons[0] = new Button("Play", new PVector(screenWidth/2, 180+(screenWidth-500)/2), 30);
+  menuButtons[1] = new Button("Choose Map", new PVector(screenWidth/2, 280+(screenWidth-500)/2), 30);
+  menuButtons[2] = new Button("Calibrate", new PVector(screenWidth/2, 380+(screenWidth-500)/2), 30);
   menubg = loadImage("../backgrounds/menu.jpg");
 }
 
 void menuDraw() {
-  background(menubg);
+  background(0);
+  image(menubg,screenWidth/2-250,(screenWidth-500)/2);
   textSize(50);
   fill(255);
   //text("Balance Labyrinth", 250, 70);

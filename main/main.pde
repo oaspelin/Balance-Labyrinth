@@ -34,9 +34,13 @@ boolean use_board = false;
 PImage bg1, bg2;
 AudioPlayer player;
 Minim minim;//audio context
+int screenWidth;
+int mapOffsetX;
+int mapOffsetY;
 
 void setup() {
-  size(500, 500, P3D);
+  screenWidth=displayHeight;
+  size(screenWidth, screenWidth, P3D);
   //arduino = new Arduino(this, Arduino.list()[5], 57600);
   bg1 = loadImage("../backgrounds/white-bg.jpg");
   bg2 = loadImage("../backgrounds/wooden-bg.jpg");
@@ -49,7 +53,7 @@ void setup() {
   map = new Map();
   readMap();
   //inits ball properties
-  ball = new Ball(40, 40); //where the ball starts
+  ball = new Ball(0, 0); //where the ball starts
   offSet=20;
   vx=0;
   vy=0;
@@ -77,8 +81,8 @@ void readMap() {
 /*
   for(int i=0; i<=5;i++){
  stroke(0);
- line(tilesize*i,0,tilesize*i,500);
- line(0, tilesize*i, 500,tilesize*i);
+ line(tilesize*i,0,tilesize*i,screenWidth);
+ line(0, tilesize*i, screenWidth,tilesize*i);
  }*/
 
 void draw() {
@@ -88,10 +92,10 @@ void draw() {
   }//Draws menu
   else {
     if (mapnum == 1) {
-      background(bg1);
+      image(bg1, screenWidth/2-250,screenWidth/6);
     } else if (mapnum == 2) {
-      background(bg2);
-    } else background(bg1);
+      image(bg2, screenWidth/2-250,screenWidth/6);
+    } else image(bg1, screenWidth/2-250,screenWidth/6);
     
     map.drawMap();
     ball.update();
