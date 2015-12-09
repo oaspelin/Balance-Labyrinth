@@ -147,9 +147,10 @@ boolean checkMapCompleted() {
       mapComplete=true;
       readMap();
     } else { 
-      menu=true;
-      mapnum=0;
-      readMap();
+      mapComplete=true;
+      //menu=true;
+      //mapnum=0;
+      //readMap();
       ball= new Ball(0, 0);
     }
     ball.x=0;

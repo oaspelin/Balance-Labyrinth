@@ -28,8 +28,12 @@ void displayMenu() {
 void mousePressed() {
   if (menu) {
     if (menuButtons[0].containsMouse()) {
-      startTime();
       menu=false;
+      mapnum=0;
+      readMap();
+      ball= new Ball(0, 0);
+      mapMenu=false;
+      startTime();
     }
     if (menuButtons[1].containsMouse()) {
       menu=false;

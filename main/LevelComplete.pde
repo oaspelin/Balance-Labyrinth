@@ -13,12 +13,23 @@ void levelCompleteDraw() {
   image(ground,0,0);
   textSize(30);
   fill(255);
-  complete = "You completed level " + mapnum + " in " + getTime() + " seconds";
+  if(mapnum < 3){
+    displayLevelComplete();
+  } else {
+    displayGameFinished();
+  }
+}
+
+void displayGameFinished() {
+  complete = "You completed level 3 in " + getTime() + " seconds";
   text(complete, screenWidth/2, 80+(screenWidth-500)/2);
-  displayLevelComplete();
+  LevelCompleteButtons[1].draw();
+  
 }
 
 void displayLevelComplete() {
+  complete = "You completed level " + mapnum + " in " + getTime() + " seconds";
+  text(complete, screenWidth/2, 80+(screenWidth-500)/2);
   for (int i = 0; i <2; i++) {
     LevelCompleteButtons[i].draw();
   }}
