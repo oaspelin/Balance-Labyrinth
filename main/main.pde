@@ -15,6 +15,8 @@ import cc.arduino.*;
 boolean menu;
 //draws "mapMenu"
 boolean mapMenu;
+//draws level complete screen
+boolean mapComplete;
 //offset of the ball
 int offSet;
 //velocity of the ball
@@ -41,6 +43,8 @@ int mapOffsetX;
 int mapOffsetY;
 int previousGoalX;
 int previousGoalY;
+float timeStart;
+float timeStop;
 
 void setup() {
   screenWidth=displayHeight;
@@ -58,6 +62,8 @@ void setup() {
   menuSetup();
   mapMenu=false;
   mapMenuSetup();
+  mapComplete=false;
+  levelCompleteSetup();
   ellipseMode(CENTER);
   mapbg.add("../maps/map1.txt");
   mapbg.add("../maps/map2.txt");
@@ -104,7 +110,10 @@ void draw() {
   }//Draws menu
   else if (mapMenu) { //"mapmenu"
     mapMenuDraw();
-  } else {
+  }
+ else if (mapComplete) { //level completed
+  levelCompleteDraw();
+ } else {
     if (mapnum == 0) {
       mapOffsetX=screenWidth/2-bg1.width/2;
       mapOffsetY=screenWidth/2-bg1.width/2;
@@ -130,10 +139,12 @@ void draw() {
 boolean checkMapCompleted() {
   boolean ret=false;
   if (ball.x == map.goalx && ball.y == map.goaly) {
+    stopTime();
     mapnum +=1;
     ret=true;
     println(map.goalx, map.goaly);
     if (mapnum < mapbg.size()) {
+      mapComplete=true;
       readMap();
     } else { 
       menu=true;
@@ -171,6 +182,17 @@ void keyPressed() {
       vx+=1;
     }
   }
+}
+
+void startTime(){
+  timeStart = millis();
+}
+void stopTime() {
+  timeStop = millis();
+}
+float getTime() {
+  float t = round((timeStop - timeStart)/10);
+  return t/100;
 }
 
 /* not really needed

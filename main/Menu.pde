@@ -28,6 +28,7 @@ void displayMenu() {
 void mousePressed() {
   if (menu) {
     if (menuButtons[0].containsMouse()) {
+      startTime();
       menu=false;
     }
     if (menuButtons[1].containsMouse()) {
@@ -44,22 +45,35 @@ void mousePressed() {
       //readMap();
       ball= new Ball(0, 0);
       mapMenu=false;
+      startTime();
     }
     if (mapButtons[1].containsMouse()) {
       mapnum=1;
       readMap();
       ball= new Ball(0, 0);
       mapMenu=false;
+      startTime();
     }
     if (mapButtons[2].containsMouse()) {
       mapnum=2;
       readMap();
       ball= new Ball(0, 0);
       mapMenu=false;
+      startTime();
     }
     if (mapButtons[3].containsMouse()) {
       menu=true;
       mapMenu=false;
+    }
+  }
+  else if (mapComplete) {
+    if (LevelCompleteButtons[0].containsMouse()) {
+      startTime();
+      mapComplete=false;
+    }
+    if (LevelCompleteButtons[1].containsMouse()) {
+      menu=true;
+      mapComplete=false;
     }
   }
 }
